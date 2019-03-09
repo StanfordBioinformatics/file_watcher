@@ -20,11 +20,14 @@ What needs to be added still is support for logging to files and support for upl
 destinations.
 */
 
+const processedDir = "./processed";
 const uploadDest = "some bucket";
-const watcher = new Watcher("./watch", "./processed", 2, uploadDest);
+
+const watcher = new Watcher("./watch", processedDir, 2, uploadDest);
 
 watcher.on("file_ready", (filename) => {
   console.log(`Uploading file ${filename} to ${uploadDest}.`);
+  console.log(`Moving file ${filename} to directory ${processedDir}.`);
 });
 
 watcher.start();
