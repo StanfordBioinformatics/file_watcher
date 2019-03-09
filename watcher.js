@@ -1,3 +1,9 @@
+/*
+Nathaniel Watson
+2019-03-08
+nathankw@stanford.edu
+*/
+
 'use strict';
 const events = require('events');
 const fs = require('fs');
