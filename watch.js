@@ -2,6 +2,7 @@
 const fs = require("fs");
 const path = require('path');
 
+const Watcher = require("./watcher");
 /*
 Nathaniel Watson
 2019-03-08
@@ -18,11 +19,12 @@ caveats specified at https://nodejs.org/docs/latest/api/fs.html#fs_caveats.
 What needs to be added still is support for logging to files and support for uploading to various
 destinations.
 */
-const Watcher = require("./watcher");
 
-const watcher = new Watcher("./watch", "./processed", 2, "some bucket");
+const uploadDest = "some bucket";
+const watcher = new Watcher("./watch", "./processed", 2, uploadDest);
+
 watcher.on("file_ready", (filename) => {
-  console.log(`Processing ${filename}`);
+  console.log(`Uploading file ${filename} to ${uploadDest}.`);
 });
 
 watcher.start();

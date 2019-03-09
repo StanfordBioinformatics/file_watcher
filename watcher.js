@@ -45,7 +45,6 @@ class Watcher extends events.EventEmitter {
       for (let fname in this.newFiles) {
         const seconds = Math.round((Date.now() - this.newFiles[fname])/1000);
         if (seconds >= this.timeSinceChange) {
-          console.log(`Uploading file ${fname} to ${this.uploadDest}.`);
           this.emit("file_ready", fname);
           // Move file to processed Directory
           const renameTo = `${this.processedDir}/${path.basename(fname)}`;
