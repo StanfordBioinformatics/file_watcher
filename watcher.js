@@ -10,7 +10,7 @@ const fs = require('fs');
 const path = require('path');
 
 class Watcher extends events.EventEmitter {
-  constructor(watchDir, processedDir, timeSinceChange, uploadDest,) {
+  constructor(watchDir, processedDir, timeSinceChange, uploadDest) {
     super();
     this.watchDir = watchDir;
     this.processedDir = processedDir;
