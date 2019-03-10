@@ -21,9 +21,13 @@ destinations.
 */
 
 const processedDir = "./processed";
+if (!(fs.existsSync(processedDir))) {                                                         
+  fs.mkdirSync(processedDir);                                                                 
+} 
+
 const uploadDest = "some bucket";
 
-const watcher = new Watcher("./watch", processedDir, 2, uploadDest);
+const watcher = new Watcher("./watch", 2, true);
 
 watcher.on("file_ready", (filename) => {
   console.log(`Uploading file ${filename} to ${uploadDest}.`);
