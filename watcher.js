@@ -10,7 +10,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Don't watch files with these suffixes. (.swp and .swx for Vim)
-const ignoreFileExtensions = ["swp", "swx"];
+const ignoreFileExtensions = [".swp", ".swx"];
 
 class Watcher extends events.EventEmitter {
   constructor(watchDir, processedDir, timeSinceChange, uploadDest) {
