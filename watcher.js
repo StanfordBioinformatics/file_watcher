@@ -9,6 +9,9 @@ const events = require('events');
 const fs = require('fs');
 const path = require('path');
 
+// Don't watch files with these suffixes. (.swp and .swx for Vim)
+const ignoreFileExtensions = [".swp". ".swx"];
+
 class Watcher extends events.EventEmitter {
   constructor(watchDir, processedDir, timeSinceChange, uploadDest) {
     super();
@@ -44,9 +47,12 @@ class Watcher extends events.EventEmitter {
         // File was moved/deleted and a rename event was triggered. We can ignore this one.
         delete this.newFiles[filename]
       } else if (!(watchFile in this.newFiles)) {
-        console.log("Updating hash.");
-        // Date.now() - the number of milliseconds elapsed since January 1, 1970.
-        this.newFiles[watchFile] = Date.now();
+        const fileExt = path.extname(watchFile);
+        if (ignoreFileExtensions.indexOf(fileExt) === -1) { 
+          console.log("Updating hash.");
+          // Date.now() - the number of milliseconds elapsed since January 1, 1970.
+          this.newFiles[watchFile] = Date.now();
+        }
       }
     });
 
